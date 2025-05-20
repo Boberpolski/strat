@@ -8,7 +8,6 @@ import base64, textwrap
 # ---------- ŚCIEŻKI DO ASSETÓW ----------
 ROOT           = Path(__file__).parent
 IMG_DIR        = ROOT / "images"
-FONT_PATH      = ROOT / "fonts" / "Formula1-Regular.otf"
 BACKGROUND_IMG = IMG_DIR / "bg.jpg"
 
 # ---------- FUNKCJE POMOCNICZE ----------
@@ -25,21 +24,6 @@ def inject_css() -> None:
             }}
             .stApp, body {{background-color: transparent !important;}}
         """))
-
-    # czcionka
-    if FONT_PATH.exists():
-        f64 = base64.b64encode(FONT_PATH.read_bytes()).decode()
-        css_parts.append(textwrap.dedent(f"""
-            @font-face {{
-                font-family: 'F1';
-                src: url(data:font/ttf;base64,{f64}) format('truetype');
-            }}
-            html, body, button, input, .stMarkdown, .stButton>button {{
-                font-family: 'F1', sans-serif;
-                letter-spacing: 0.3px;
-            }}
-        """))
-
     # ogólne style
     css_parts.append(textwrap.dedent("""
         .appview-container, .main {padding-top:40px;}
@@ -100,7 +84,7 @@ TEAM_ACADEMY_NAMES = {
     "WILLIAMS": "williams", "DAMS": "dams","VIRTUOSI": "virtuosi","ART GP": "artgp",
     "CARLIN": "carlin","CAMPOS": "campos","CHAROUZ": "charouz","HITECH": "hitech",
     "MP MOTORSPORT": "mpmotorsports","HWA RACELAB": "hwaracelab","TRIDENT": "trident",
-    "PREMA": "prema",
+    "PREMA": "prema","JENZER": "jenzer"
 }
 LOGOS_B64 = {name: ("data:image/png;base64," +
                     base64.b64encode((LOGO_DIR/f"{file}.png").read_bytes()).decode())
@@ -172,6 +156,31 @@ def get_lineup(year: str, series: str) -> list[dict]:
             {"KRAJ": flag("RU"), "NAZWISKO": "MAZEPIN", "TEAM": "HITECH", "AKADEMIA": "-", "WIEK": 21, "RS": 6, "CO": 5, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 6, "ST": 5, "OVR": 46},
             {"KRAJ": flag("IT"), "NAZWISKO": "GHIOTTO", "TEAM": "HITECH", "AKADEMIA": "-", "WIEK": 25, "RS": 7, "CO": 4, "OV": 6, "EX": 6, "QU": 6, "WE": 8, "CA": 6, "ST": 7, "OVR": 50}
         ]
+    if year == "2020" and series == "Formula 3":
+        return[
+            {"KRAJ": flag("DK"), "NAZWISKO": "VESTI", "TEAM": "PREMA", "AKADEMIA": "-", "WIEK": 18, "RS": 5, "CO": 4, "OV": 7, "EX": 6, "QU": 5, "WE": 5, "CA": 6, "ST": 6, "OVR": 44},
+            {"KRAJ": flag("AU"), "NAZWISKO": "PIASTRI", "TEAM": "PREMA", "AKADEMIA": "RENAULT", "WIEK": 19, "RS": 7, "CO": 5, "OV": 6, "EX": 4, "QU": 4, "WE": 4, "CA": 7, "ST": 4, "OVR": 41},
+            {"KRAJ": flag("NZ"), "NAZWISKO": "LAWSON", "TEAM": "HITECH", "AKADEMIA": "RED BULL", "WIEK": 18, "RS": 6, "CO": 7, "OV": 6, "EX": 5, "QU": 6, "WE": 6, "CA": 6, "ST": 7, "OVR": 49},
+            {"KRAJ": flag("NO"), "NAZWISKO": "HAUGER", "TEAM": "HITECH", "AKADEMIA": "RED BULL", "WIEK": 17, "RS": 6, "CO": 5, "OV": 5, "EX": 5, "QU": 6, "WE": 5, "CA": 5, "ST": 5, "OVR": 42},
+            {"KRAJ": flag("FR"), "NAZWISKO": "POURCHAIRE", "TEAM": "ART GP", "AKADEMIA": "SAUBER", "WIEK": 17, "RS": 4, "CO": 6, "OV": 5, "EX": 7, "QU": 7, "WE": 5, "CA": 4, "ST": 6, "OVR": 44},
+            {"KRAJ": flag("RU"), "NAZWISKO": "SMOLYAR", "TEAM": "ART GP", "AKADEMIA": "-", "WIEK": 19, "RS": 4, "CO": 4, "OV": 7, "EX": 5, "QU": 7, "WE": 6, "CA": 4, "ST": 7, "OVR": 44},
+            {"KRAJ": flag("DE"), "NAZWISKO": "BECKMANN", "TEAM": "TRIDENT", "AKADEMIA": "-", "WIEK": 20, "RS": 7, "CO": 4, "OV": 4, "EX": 7, "QU": 4, "WE": 7, "CA": 5, "ST": 4, "OVR": 42},
+            {"KRAJ": flag("DE"), "NAZWISKO": "ZENDELI", "TEAM": "TRIDENT", "AKADEMIA": "-", "WIEK": 21, "RS": 6, "CO": 6, "OV": 4, "EX": 4, "QU": 5, "WE": 4, "CA": 6, "ST": 6, "OVR": 41},
+            {"KRAJ": flag("GB"), "NAZWISKO": "HUGHES", "TEAM": "HWA RACELAB", "AKADEMIA": "-", "WIEK": 26, "RS": 6, "CO": 6, "OV": 6, "EX": 7, "QU": 6, "WE": 7, "CA": 6, "ST": 6, "OVR": 50},
+            {"KRAJ": flag("AU"), "NAZWISKO": "DOOHAN", "TEAM": "HWA RACELAB", "AKADEMIA": "RENAULT", "WIEK": 17, "RS": 5, "CO": 4, "OV": 7, "EX": 7, "QU": 4, "WE": 6, "CA": 7, "ST": 5, "OVR": 45},
+            {"KRAJ": flag("NL"), "NAZWISKO": "VERSCHOOR", "TEAM": "MP MOTORSPORT", "AKADEMIA": "RED BULL", "WIEK": 20, "RS": 7, "CO": 6, "OV": 6, "EX": 6, "QU": 6, "WE": 7, "CA": 6, "ST": 6, "OVR": 50},
+            {"KRAJ": flag("NL"), "NAZWISKO": "VISCAAL", "TEAM": "MP MOTORSPORT", "AKADEMIA": "-", "WIEK": 21, "RS": 7, "CO": 6, "OV": 7, "EX": 7, "QU": 4, "WE": 4, "CA": 5, "ST": 4, "OVR": 44},
+            {"KRAJ": flag("IT"), "NAZWISKO": "NANNINI", "TEAM": "JENZER", "AKADEMIA": "-", "WIEK": 17, "RS": 6, "CO": 4, "OV": 4, "EX": 4, "QU": 6, "WE": 4, "CA": 6, "ST": 4, "OVR": 38},
+            {"KRAJ": flag("AU"), "NAZWISKO": "WILLIAMS", "TEAM": "JENZER", "AKADEMIA": "-", "WIEK": 20, "RS": 5, "CO": 4, "OV": 4, "EX": 5, "QU": 6, "WE": 5, "CA": 4, "ST": 5, "OVR": 38},
+            {"KRAJ": flag("DE"), "NAZWISKO": "SCHUMACHER", "TEAM": "CHAROUZ", "AKADEMIA": "SAUBER", "WIEK": 19, "RS": 6, "CO": 4, "OV": 7, "EX": 4, "QU": 6, "WE": 7, "CA": 6, "ST": 4, "OVR": 44},
+            {"KRAJ": flag("CZ"), "NAZWISKO": "STANEK", "TEAM": "CHAROUZ", "AKADEMIA": "SAUBER", "WIEK": 16, "RS": 4, "CO": 5, "OV": 6, "EX": 6, "QU": 6, "WE": 4, "CA": 6, "ST": 4, "OVR": 41},
+            {"KRAJ": flag("FR"), "NAZWISKO": "NOVALAK", "TEAM": "CARLIN", "AKADEMIA": "-", "WIEK": 20, "RS": 7, "CO": 4, "OV": 5, "EX": 4, "QU": 5, "WE": 5, "CA": 6, "ST": 6, "OVR": 42},
+            {"KRAJ": flag("US"), "NAZWISKO": "DAS", "TEAM": "CARLIN", "AKADEMIA": "-", "WIEK": 20, "RS": 6, "CO": 4, "OV": 4, "EX": 4, "QU": 4, "WE": 7, "CA": 5, "ST": 4, "OVR": 38},
+            {"KRAJ": flag("DE"), "NAZWISKO": "FLORSCH", "TEAM": "CAMPOS", "AKADEMIA": "-", "WIEK": 20, "RS": 6, "CO": 4, "OV": 5, "EX": 5, "QU": 7, "WE": 6, "CA": 7, "ST": 5, "OVR": 45},
+            {"KRAJ": flag("AU"), "NAZWISKO": "PERONI", "TEAM": "CAMPOS", "AKADEMIA": "-", "WIEK": 21, "RS": 5, "CO": 4, "OV": 5, "EX": 4, "QU": 5, "WE": 4, "CA": 5, "ST": 4, "OVR": 36},
+            {"KRAJ": flag("GB"), "NAZWISKO": "FEWTRELL", "TEAM": "DAMS", "AKADEMIA": "RENAULT", "WIEK": 21, "RS": 7, "CO": 5, "OV": 4, "EX": 7, "QU": 7, "WE": 5, "CA": 6, "ST": 7, "OVR": 48},
+            {"KRAJ": flag("US"), "NAZWISKO": "SARGEANT", "TEAM": "DAMS", "AKADEMIA": "-", "WIEK": 20, "RS": 5, "CO": 5, "OV": 5, "EX": 4, "QU": 4, "WE": 5, "CA": 6, "ST": 7, "OVR": 41},
+        ]
     return []
 
 def get_teams(year: str, series: str) -> list[dict]:
@@ -188,6 +197,34 @@ def get_teams(year: str, series: str) -> list[dict]:
             {"KRAJ": flag("US"), "TEAM": "HAAS", "SILNIK": "FERRARI", "OVR": 439, "O+S": 533},
             {"KRAJ": flag("IT"), "TEAM": "ALPHA TAURI", "SILNIK": "HONDA", "OVR": 425, "O+S": 512},
             {"KRAJ": flag("GB"), "TEAM": "WILLIAMS", "SILNIK": "MERCEDES", "OVR": 416, "O+S": 505}
+        ]
+    if year == "2020" and series == "Formula 2":
+        return[
+            {"KRAJ": flag("FR"), "TEAM": "DAMS"},
+            {"KRAJ": flag("GB"), "TEAM": "VIRTUOSI"},
+            {"KRAJ": flag("FR"), "TEAM": "ART GP"},
+            {"KRAJ": flag("GB"), "TEAM": "CARLIN"},
+            {"KRAJ": flag("ES"), "TEAM": "CAMPOS"},
+            {"KRAJ": flag("CZ"), "TEAM": "CHAROUZ"},
+            {"KRAJ": flag("NL"), "TEAM": "MP MOTORSPORT"},
+            {"KRAJ": flag("DE"), "TEAM": "HWA RACELAB"},
+            {"KRAJ": flag("IT"), "TEAM": "PREMA"},
+            {"KRAJ": flag("IT"), "TEAM": "TRIDENT"},
+            {"KRAJ": flag("GB"), "TEAM": "HITECH"},
+        ]
+    if year == "2020" and series == "Formula 3":
+        return[
+            {"KRAJ": flag("FR"), "TEAM": "DAMS"},
+            {"KRAJ": flag("CH"), "TEAM": "JENZER"},
+            {"KRAJ": flag("FR"), "TEAM": "ART GP"},
+            {"KRAJ": flag("GB"), "TEAM": "CARLIN"},
+            {"KRAJ": flag("ES"), "TEAM": "CAMPOS"},
+            {"KRAJ": flag("CZ"), "TEAM": "CHAROUZ"},
+            {"KRAJ": flag("NL"), "TEAM": "MP MOTORSPORT"},
+            {"KRAJ": flag("DE"), "TEAM": "HWA RACELAB"},
+            {"KRAJ": flag("IT"), "TEAM": "PREMA"},
+            {"KRAJ": flag("IT"), "TEAM": "TRIDENT"},
+            {"KRAJ": flag("GB"), "TEAM": "HITECH"},
         ]
     return []
 
@@ -216,6 +253,56 @@ def get_dc (year: str, series: str) -> list[dict]:
             {"KRAJ": flag("DK"), "NAZWISKO": "MAGNUSSEN", "PKT": 2, "P1": 0, "P2": 0, "P3": 0},
             {"KRAJ": flag("CA"), "NAZWISKO": "LATIFI", "PKT": 1, "P1": 0, "P2": 0, "P3": 0}
         ]
+    if year == "2020" and series == "Formula 2":
+        return [
+            {"KRAJ": flag("GB"), "NAZWISKO": "AITKEN", "PKT": 173, "P1": 4, "P2": 3, "P3": 0},
+            {"KRAJ": flag("RU"), "NAZWISKO": "MARKIELOV", "PKT": 158, "P1": 4, "P2": 2, "P3": 0},
+            {"KRAJ": flag("IN"), "NAZWISKO": "DARUVALA", "PKT": 119, "P1": 1, "P2": 2, "P3": 0},
+            {"KRAJ": flag("IT"), "NAZWISKO": "GHIOTTO", "PKT": 95, "P1": 2, "P2": 1, "P3": 1},
+            {"KRAJ": flag("NZ"), "NAZWISKO": "ARMSTRONG", "PKT": 80, "P1": 0, "P2": 0, "P3": 2},
+            {"KRAJ": flag("RU"), "NAZWISKO": "SHWARTZMAN", "PKT": 68, "P1": 1, "P2": 0, "P3": 1},
+            {"KRAJ": flag("CN"), "NAZWISKO": "ZHOU", "PKT": 66, "P1": 0, "P2": 1, "P3": 1},
+            {"KRAJ": flag("JP"), "NAZWISKO": "SAMIA", "PKT": 59, "P1": 0, "P2": 0, "P3": 1},
+            {"KRAJ": flag("GB"), "NAZWISKO": "ILOTT", "PKT": 58, "P1": 0, "P2": 1, "P3": 0},
+            {"KRAJ": flag("JP"), "NAZWISKO": "MATSUSHITA", "PKT": 53, "P1": 0, "P2": 1, "P3": 1},
+            {"KRAJ": flag("JP"), "NAZWISKO": "SATO", "PKT": 51, "P1": 0, "P2": 1, "P3": 1},
+            {"KRAJ": flag("CH"), "NAZWISKO": "DELETRAZ", "PKT": 46, "P1": 0, "P2": 0, "P3": 3},
+            {"KRAJ": flag("BR"), "NAZWISKO": "PIQUET", "PKT": 42, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("RU"), "NAZWISKO": "MAZEPIN", "PKT": 30, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("GB"), "NAZWISKO": "TICKTUM", "PKT": 29, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("DK"), "NAZWISKO": "LUNDGAARD", "PKT": 25, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("BR"), "NAZWISKO": "DRUGOVICH", "PKT": 20, "P1": 0, "P2": 0, "P3": 1},
+            {"KRAJ": flag("DE"), "NAZWISKO": "SCHUMACHER", "PKT": 16, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("EE"), "NAZWISKO": "VIPS", "PKT": 15, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("FR"), "NAZWISKO": "ALESI", "PKT": 6, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("JP"), "NAZWISKO": "TSUNODA", "PKT": 3, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("IL"), "NAZWISKO": "NISSANY", "PKT": 0, "P1": 0, "P2": 0, "P3": 0}
+        ]
+    if year == "2020" and series == "Formula 3":
+        return [
+            {"KRAJ": flag("AU"), "NAZWISKO": "FEWTRELL", "PKT": 223, "P1": 7, "P2": 1, "P3": 2},
+            {"KRAJ": flag("FR"), "NAZWISKO": "POURCHAIRE", "PKT": 116, "P1": 2, "P2": 0, "P3": 2},
+            {"KRAJ": flag("NZ"), "NAZWISKO": "LAWSON", "PKT": 110, "P1": 1, "P2": 2, "P3": 2},
+            {"KRAJ": flag("DE"), "NAZWISKO": "FLORSCH", "PKT": 108, "P1": 1, "P2": 2, "P3": 2},
+            {"KRAJ": flag("GB"), "NAZWISKO": "HUGHES", "PKT": 106, "P1": 0, "P2": 4, "P3": 0},
+            {"KRAJ": flag("NL"), "NAZWISKO": "VERSCHOOR", "PKT": 76, "P1": 0, "P2": 0, "P3": 2},
+            {"KRAJ": flag("CZ"), "NAZWISKO": "STANEK", "PKT": 68, "P1": 0, "P2": 0, "P3": 1},
+            {"KRAJ": flag("DK"), "NAZWISKO": "VESTI", "PKT": 67, "P1": 0, "P2": 0, "P3": 1},
+            {"KRAJ": flag("FR"), "NAZWISKO": "NOVALAK", "PKT": 58, "P1": 1, "P2": 1, "P3": 0},
+            {"KRAJ": flag("DE"), "NAZWISKO": "ZENDELI", "PKT": 50, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("RU"), "NAZWISKO": "SMOLYAR", "PKT": 43, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("DE"), "NAZWISKO": "BECKMANN", "PKT": 40, "P1": 0, "P2": 1, "P3": 0},
+            {"KRAJ": flag("DE"), "NAZWISKO": "SCHUMACHER", "PKT": 32, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("NL"), "NAZWISKO": "VISCAAL", "PKT": 22, "P1": 0, "P2": 1, "P3": 0},
+            {"KRAJ": flag("AU"), "NAZWISKO": "PERONI", "PKT": 17, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("US"), "NAZWISKO": "SARGEANT", "PKT": 16, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("NO"), "NAZWISKO": "HAUGER", "PKT": 13, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("AU"), "NAZWISKO": "PIASTRI", "PKT": 12, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("IT"), "NAZWISKO": "NANNINI", "PKT": 12, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("US"), "NAZWISKO": "DAS", "PKT": 12, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("AU"), "NAZWISKO": "DOOHAN", "PKT": 7, "P1": 0, "P2": 0, "P3": 0},
+            {"KRAJ": flag("AU"), "NAZWISKO": "WILLIAMS", "PKT": 4, "P1": 0, "P2": 0, "P3": 0},
+        ]
     return []
 
 def get_cc (year: str, series: str) -> list[dict]:
@@ -233,8 +320,39 @@ def get_cc (year: str, series: str) -> list[dict]:
             {"KRAJ": flag("GB"), "TEAM": "WILLIAMS", "PKT": 11, "MWM": 1},
             {"KRAJ": flag("US"), "TEAM": "HAAS", "PKT": 8, "MWM": -2}
         ]
-    return[]
-# ---------- WYSWIETLANIE POD‑KATEGORII ----------
+    if year == "2020" and series == "Formula 2":
+        return [
+            {"KRAJ": flag("ES"), "TEAM": "CAMPOS", "PKT": 232},
+            {"KRAJ": flag("DE"), "TEAM": "HWA RACELAB", "PKT": 164},
+            {"KRAJ": flag("GB"), "TEAM": "HITECH", "PKT": 125},
+            {"KRAJ": flag("GB"), "TEAM": "VIRTUOSI", "PKT": 124},
+            {"KRAJ": flag("GB"), "TEAM": "CARLIN", "PKT": 122},
+            {"KRAJ": flag("FR"), "TEAM": "ART GP", "PKT": 105},
+            {"KRAJ": flag("CZ"), "TEAM": "CHAROUZ", "PKT": 88},
+            {"KRAJ": flag("IT"), "TEAM": "PREMA", "PKT": 84},
+            {"KRAJ": flag("NL"), "TEAM": "MP MOTORSPORT", "PKT": 73},
+            {"KRAJ": flag("IT"), "TEAM": "TRIDENT", "PKT": 51},
+            {"KRAJ": flag("FR"), "TEAM": "DAMS", "PKT": 44}
+        ]
+    if year == "2020" and series == "Formula 3":
+        return [
+            {"KRAJ": flag("FR"), "TEAM": "DAMS", "PKT": 239},
+            {"KRAJ": flag("FR"), "TEAM": "ART GP", "PKT": 159},
+            {"KRAJ": flag("ES"), "TEAM": "CAMPOS", "PKT": 125},
+            {"KRAJ": flag("GB"), "TEAM": "HITECH", "PKT": 123},
+            {"KRAJ": flag("DE"), "TEAM": "HWA RACELAB", "PKT": 113},
+            {"KRAJ": flag("CZ"), "TEAM": "CHAROUZ", "PKT": 100},
+            {"KRAJ": flag("NL"), "TEAM": "MP MOTORSPORT", "PKT": 98},
+            {"KRAJ": flag("IT"), "TEAM": "TRIDENT", "PKT": 90},
+            {"KRAJ": flag("IT"), "TEAM": "PREMA", "PKT": 79},
+            {"KRAJ": flag("GB"), "TEAM": "CARLIN", "PKT": 70},
+            {"KRAJ": flag("CH"), "TEAM": "JENZER", "PKT": 16},
+        ]
+    return []
+
+
+# ------------------------------------------------------- WYSWIETLANIE POD‑KATEGORII --------------------------------------------------------------------
+
 def show_lineup(year: str, series: str):
     data = get_lineup(year, series)
     if not data:
