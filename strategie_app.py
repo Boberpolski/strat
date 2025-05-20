@@ -97,7 +97,10 @@ TEAM_ACADEMY_NAMES = {
     "MERCEDES": "mercedes", "RED BULL": "redbull", "FERRARI": "ferrari",
     "RACING POINT": "racingpoint", "MCLAREN": "mclaren", "ALFA ROMEO": "alfaromeo",
     "RENAULT": "renault", "HAAS": "haas", "ALPHA TAURI": "alphatauri",
-    "WILLIAMS": "williams",
+    "WILLIAMS": "williams", "DAMS": "dams","VIRTUOSI": "virtuosi","ART GP": "artgp",
+    "CARLIN": "carlin","CAMPOS": "campos","CHAROUZ": "charouz","HITECH": "hitech",
+    "MP MOTORSPORT": "mpmotorsports","HWA RACELAB": "hwaracelab","TRIDENT": "trident",
+    "PREMA": "prema",
 }
 LOGOS_B64 = {name: ("data:image/png;base64," +
                     base64.b64encode((LOGO_DIR/f"{file}.png").read_bytes()).decode())
@@ -143,7 +146,31 @@ def get_lineup(year: str, series: str) -> list[dict]:
             {"KRAJ": flag("RU"), "NAZWISKO": "KVYAT", "TEAM": "ALPHA TAURI", "AKADEMIA": "RED BULL", "WIEK": 26, "RS": 7, "CO": 7, "OV": 8, "EX": 8, "QU": 7, "WE": 7, "CA": 8, "ST": 8, "OVR": 60, "KONTRAKT": 2020},
             {"KRAJ": flag("GB"), "NAZWISKO": "RUSSELL", "TEAM": "WILLIAMS", "AKADEMIA": "MERCEDES", "WIEK": 22, "RS": 7, "CO": 8, "OV": 8, "EX": 7, "QU": 8, "WE": 7, "CA": 8, "ST": 8, "OVR": 61, "KONTRAKT": 2020},
             {"KRAJ": flag("CA"), "NAZWISKO": "LATIFI", "TEAM": "WILLIAMS", "AKADEMIA": "-", "WIEK": 24, "RS": 7, "CO": 7, "OV": 7, "EX": 6, "QU": 7, "WE": 6, "CA": 7, "ST": 7, "OVR": 54, "KONTRAKT": 2020},
-
+        ]
+    if year == "2020" and series == "Formula 2":
+        return[
+            {"KRAJ": flag("GB"), "NAZWISKO": "TICKTUM", "TEAM": "DAMS", "AKADEMIA": "MERCEDES", "WIEK": 21, "RS": 7, "CO": 5, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 49},
+            {"KRAJ": flag("EE"), "NAZWISKO": "VIPS", "TEAM": "DAMS", "AKADEMIA": "RED BULL", "WIEK": 20, "RS": 6, "CO": 6, "OV": 7, "EX": 6, "QU": 6, "WE": 5, "CA": 6, "ST": 6, "OVR": 48},
+            {"KRAJ": flag("GB"), "NAZWISKO": "ILOTT", "TEAM": "VIRTUOSI", "AKADEMIA": "FERRARI", "WIEK": 22, "RS": 6, "CO": 7, "OV": 6, "EX": 6, "QU": 7, "WE": 7, "CA": 6, "ST": 7, "OVR": 52},
+            {"KRAJ": flag("CN"), "NAZWISKO": "ZHOU", "TEAM": "VIRTUOSI", "AKADEMIA": "RENAULT", "WIEK": 21, "RS": 6, "CO": 6, "OV": 5, "EX": 6, "QU": 7, "WE": 6, "CA": 7, "ST": 6, "OVR": 49},
+            {"KRAJ": flag("NZ"), "NAZWISKO": "ARMSTRONG", "TEAM": "ART GP", "AKADEMIA": "FERRARI", "WIEK": 20, "RS": 6, "CO": 7, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 50},
+            {"KRAJ": flag("DK"), "NAZWISKO": "LUNDGAARD", "TEAM": "ART GP", "AKADEMIA": "RENAULT", "WIEK": 19, "RS": 7, "CO": 6, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 50},
+            {"KRAJ": flag("IN"), "NAZWISKO": "DARUVALA", "TEAM": "CARLIN", "AKADEMIA": "RED BULL", "WIEK": 22, "RS": 6, "CO": 7, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 50},
+            {"KRAJ": flag("JP"), "NAZWISKO": "TSUNODA", "TEAM": "CARLIN", "AKADEMIA": "RED BULL", "WIEK": 20, "RS": 6, "CO": 5, "OV": 6, "EX": 5, "QU": 6, "WE": 5, "CA": 6, "ST": 7, "OVR": 46},
+            {"KRAJ": flag("GB"), "NAZWISKO": "AITKEN", "TEAM": "CAMPOS", "AKADEMIA": "-", "WIEK": 25, "RS": 6, "CO": 6, "OV": 7, "EX": 6, "QU": 7, "WE": 6, "CA": 7, "ST": 7, "OVR": 52},
+            {"KRAJ": flag("BR"), "NAZWISKO": "SAMAIA", "TEAM": "CAMPOS", "AKADEMIA": "-", "WIEK": 24, "RS": 5, "CO": 6, "OV": 7, "EX": 7, "QU": 6, "WE": 7, "CA": 8, "ST": 7, "OVR": 53},
+            {"KRAJ": flag("CH"), "NAZWISKO": "DELETRAZ", "TEAM": "CHAROUZ", "AKADEMIA": "-", "WIEK": 23, "RS": 7, "CO": 7, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 51},
+            {"KRAJ": flag("BR"), "NAZWISKO": "PIQUET", "TEAM": "CHAROUZ", "AKADEMIA": "-", "WIEK": 22, "RS": 6, "CO": 6, "OV": 7, "EX": 6, "QU": 6, "WE": 7, "CA": 6, "ST": 6, "OVR": 50},
+            {"KRAJ": flag("JP"), "NAZWISKO": "MATSUSHITA", "TEAM": "MP MOTORSPORT", "AKADEMIA": "-", "WIEK": 27, "RS": 7, "CO": 7, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 51},
+            {"KRAJ": flag("BR"), "NAZWISKO": "DRUGOVICH", "TEAM": "MP MOTORSPORT", "AKADEMIA": "-", "WIEK": 20, "RS": 5, "CO": 6, "OV": 4, "EX": 6, "QU": 8, "WE": 4, "CA": 4, "ST": 7, "OVR": 44},
+            {"KRAJ": flag("RU"), "NAZWISKO": "MARKIELOV", "TEAM": "HWA RACELAB", "AKADEMIA": "-", "WIEK": 26, "RS": 7, "CO": 7, "OV": 6, "EX": 7, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 52},
+            {"KRAJ": flag("FR"), "NAZWISKO": "ALESI", "TEAM": "HWA RACELAB", "AKADEMIA": "-", "WIEK": 21, "RS": 6, "CO": 7, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 7, "ST": 6, "OVR": 50},
+            {"KRAJ": flag("RU"), "NAZWISKO": "SHWARTZMAN", "TEAM": "PREMA", "AKADEMIA": "FERRARI", "WIEK": 21, "RS": 5, "CO": 6, "OV": 7, "EX": 6, "QU": 7, "WE": 6, "CA": 6, "ST": 6, "OVR": 49},
+            {"KRAJ": flag("DE"), "NAZWISKO": "SCHUMACHER", "TEAM": "PREMA", "AKADEMIA": "FERRARI", "WIEK": 21, "RS": 6, "CO": 5, "OV": 6, "EX": 6, "QU": 5, "WE": 6, "CA": 7, "ST": 6, "OVR": 47},
+            {"KRAJ": flag("IL"), "NAZWISKO": "NISSANY", "TEAM": "TRIDENT", "AKADEMIA": "WILLIAMS", "WIEK": 26, "RS": 4, "CO": 7, "OV": 5, "EX": 4, "QU": 4, "WE": 6, "CA": 7, "ST": 7, "OVR": 44},
+            {"KRAJ": flag("JP"), "NAZWISKO": "SATO", "TEAM": "TRIDENT", "AKADEMIA": "-", "WIEK": 21, "RS": 5, "CO": 8, "OV": 7, "EX": 8, "QU": 6, "WE": 6, "CA": 5, "ST": 6, "OVR": 51},
+            {"KRAJ": flag("RU"), "NAZWISKO": "MAZEPIN", "TEAM": "HITECH", "AKADEMIA": "-", "WIEK": 21, "RS": 6, "CO": 5, "OV": 6, "EX": 6, "QU": 6, "WE": 6, "CA": 6, "ST": 5, "OVR": 46},
+            {"KRAJ": flag("IT"), "NAZWISKO": "GHIOTTO", "TEAM": "HITECH", "AKADEMIA": "-", "WIEK": 25, "RS": 7, "CO": 4, "OV": 6, "EX": 6, "QU": 6, "WE": 8, "CA": 6, "ST": 7, "OVR": 50}
         ]
     return []
 
@@ -159,6 +186,8 @@ def get_teams(year: str, series: str) -> list[dict]:
             {"KRAJ": flag("CH"), "TEAM": "ALFA ROMEO", "SILNIK": "FERRARI", "OVR": 445, "O+S": 539},
             {"KRAJ": flag("FR"), "TEAM": "RENAULT", "SILNIK": "RENAULT",  "OVR": 453, "O+S": 538},
             {"KRAJ": flag("US"), "TEAM": "HAAS", "SILNIK": "FERRARI", "OVR": 439, "O+S": 533},
+            {"KRAJ": flag("IT"), "TEAM": "ALPHA TAURI", "SILNIK": "HONDA", "OVR": 425, "O+S": 512},
+            {"KRAJ": flag("GB"), "TEAM": "WILLIAMS", "SILNIK": "MERCEDES", "OVR": 416, "O+S": 505}
         ]
     return []
 
@@ -217,6 +246,7 @@ def show_lineup(year: str, series: str):
         d["LOGO_AKADEMIA"] = logo_img(d["AKADEMIA"]) if d["AKADEMIA"] != "-" else ""
 
     df = pd.DataFrame(data)
+    df.insert(0, 'NR', range(1, len(df) + 1))
 
     df.rename(columns={"LOGO_TEAM": "zespół", "LOGO_AKADEMIA": "akademia"}, inplace=True)
 
@@ -243,7 +273,6 @@ def show_lineup(year: str, series: str):
     html_table = html_table.replace('<img ', '<img width="45" ')
 
     st.markdown(html_table, unsafe_allow_html=True)
-    print("1")
 
 def show_teams(year: str, series: str):
     data = get_teams(year, series)
@@ -255,6 +284,7 @@ def show_teams(year: str, series: str):
         d["TEAM"] = logo_img(d["TEAM"])
 
     df = pd.DataFrame(data)
+    df.insert(0, 'NR', range(1, len(df) + 1))
     
     cols = df.columns.tolist()
 
@@ -273,6 +303,7 @@ def show_drivers_standings(year: str, series: str):
         return
 
     df = pd.DataFrame(data)
+    df.insert(0, 'P', range(1, len(df) + 1))
     
     cols = df.columns.tolist()
 
@@ -293,6 +324,7 @@ def show_constructors_standings(year: str, series: str):
         d["TEAM"] = logo_img(d["TEAM"])
 
     df = pd.DataFrame(data)
+    df.insert(0, 'P', range(1, len(df) + 1))
     
     cols = df.columns.tolist()
 
