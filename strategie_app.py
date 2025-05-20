@@ -280,7 +280,7 @@ def get_dc (year: str, series: str) -> list[dict]:
         ]
     if year == "2020" and series == "Formula 3":
         return [
-            {"KRAJ": flag("AU"), "NAZWISKO": "FEWTRELL", "PKT": 223, "P1": 7, "P2": 1, "P3": 2},
+            {"KRAJ": flag("GB"), "NAZWISKO": "FEWTRELL", "PKT": 223, "P1": 7, "P2": 1, "P3": 2},
             {"KRAJ": flag("FR"), "NAZWISKO": "POURCHAIRE", "PKT": 116, "P1": 2, "P2": 0, "P3": 2},
             {"KRAJ": flag("NZ"), "NAZWISKO": "LAWSON", "PKT": 110, "P1": 1, "P2": 2, "P3": 2},
             {"KRAJ": flag("DE"), "NAZWISKO": "FLORSCH", "PKT": 108, "P1": 1, "P2": 2, "P3": 2},
